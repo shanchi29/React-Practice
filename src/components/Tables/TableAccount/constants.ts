@@ -1,9 +1,10 @@
-const columns: DataType ['columns'] = [
+import {DataType} from "./TableAccount";
+
+export const columns: any[] = [
     {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text) => <a>{text}</a>,
     },
     {
         title: 'Password',
@@ -15,9 +16,8 @@ const columns: DataType ['columns'] = [
         dataIndex: 'comments',
         key: 'comments',
     },
-
 ];
-const data: DataType[] = [
+export const data: DataType[] = [
     {
         key: '1',
         name: 'Графов Дмитрий',

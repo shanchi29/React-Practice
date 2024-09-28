@@ -1,0 +1,26 @@
+.card {
+
+  h1 {
+    text-align: center;
+  }
+
+  .cardInfo {
+    display: flex;
+    justify-content: space-between;
+
+    .avatar {
+      width: 20vh;
+    }
+
+    .userInfo {
+      width: 20vh;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+    }
+    .headlines{
+      font-weight: bold;
+    }
+  }
+}

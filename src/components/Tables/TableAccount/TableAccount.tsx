@@ -1,57 +1,57 @@
-import React from 'react';
-import {  Table } from 'antd';
-import type { TableProps } from 'antd';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Table} from 'antd';
+import {columns} from "./constants";
+import styles from './TableAccount.module.scss'
+import {Button} from "../../ui/Button/Button";
+import {useAppSelector} from "../../../store/hook/reduxHooks";
+import {selectFormData} from "../../../store/selectors/selectors";
 
-interface DataType {
+
+export interface DataType{
     key: string;
     name: string;
     password: string;
     comments: string;
 }
-const TableAccount: React.FC = () => {
 
-    const columns: TableProps<DataType>['columns'] = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text) => <a>{text}</a>,
-        },
-        {
-            title: 'Password',
-            dataIndex: 'password',
-            key: 'password',
-        },
-        {
-            title: 'Comments',
-            dataIndex: 'comments',
-            key: 'comments',
-        },
+interface TableAccountProps {
+    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+    formData: FormData[];
+    setIsModalOpenCard: Dispatch<SetStateAction<boolean>>;
+    setSelectedRow: Dispatch<SetStateAction<FormData>>;
+}
 
-    ];
+const TableAccount: React.FC<TableAccountProps> = ({
+     setIsModalOpen,
+     formData,
+     setIsModalOpenCard,
+     setSelectedRow
+}: TableAccountProps) => {
 
-    const data: DataType[] = [
-        {
-            key: '',
-            name: '',
-            password: '',
-            comments: ''
-        },
-        {
-            key: '',
-            name: '',
-            password: '',
-            comments: ''
-        },
-        {
-            key: '',
-            name: '',
-            password: '',
-            comments: ''
-        },
-    ];
+    const formData1 = useAppSelector(selectFormData)
+
+    const handleRowClick = (row: FormData) => {
+        setIsModalOpenCard(true)
+        setSelectedRow(row)
+    }
+
     return (
-        <Table style={{margin: '0 500px'}} columns={columns} dataSource={data}/>
+        <div className={styles.table}>
+            <h1>Пользователи</h1>
+            <Button
+                onClick={() => setIsModalOpen(true)}
+                className={styles.button}
+                type="primary"
+                text='Добавить'
+            />
+        <Table
+            onRow={(row) => ({
+                onDoubleClick: () => handleRowClick(row),
+            })}
+            style={{
+            width: '100%'
+        }}  columns={columns} dataSource={formData1}/>
+        </div>
     )
 };
 export default TableAccount;

@@ -1,4 +1,25 @@
-.head {
-  display: flex;
-  justify-content: center;
+.header {
+  background: antiquewhite;
+  height: 80px;
+  .head {
+    display: flex;
+    justify-content: center;
+
+    .nav {
+      margin: 25px auto;
+
+      .active {
+        color: red;
+      }
+
+      a {
+        color: black;
+        padding: 15px;
+        text-decoration: none;
+        font-size: 20px;
+
+      }
+    }
+  }
 }
+

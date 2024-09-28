@@ -1,13 +1,14 @@
 import React from 'react';
-import {ReactHookForm} from "./components/ReactHookForm/ReactHookForm";
+import {BrowserRouter} from "react-router-dom";
+import AppLayout from "./pages/AppLayout/AppLayout";
+import Header from "./components/Header/Header";
 
 const App = () => {
     return (
-        <div>
-            <ReactHookForm />
-            {/*<ContactForm />*/}
-        </div>
-    );
+            <BrowserRouter>
+                <Header />
+                <AppLayout />
+            </BrowserRouter>
+    )
 };
-
 export default App;

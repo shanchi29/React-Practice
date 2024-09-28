@@ -1,0 +1,13 @@
+.table {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  width: 60vw;
+  margin: 0 auto;
+
+  .button {
+    margin-bottom: 10px;
+    margin-right: auto;
+  }
+}

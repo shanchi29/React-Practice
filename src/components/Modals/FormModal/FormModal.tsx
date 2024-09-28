@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
-import ReactHookForm from "../../components/ReactHookForm/ReactHookForm";
+import React, {Dispatch, SetStateAction} from 'react';
+import { Modal } from 'antd';
+import ReactHookForm from "../../Forms/ReactHookForm/ReactHookForm";
+import {FormData} from "../../Forms/ReactHookForm/types";
 
+interface FormModalProps {
+    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+    isModalOpen: boolean;
+    setFormData: Dispatch<SetStateAction<FormData[]>>;
+    formData: FormData[];
+}
 
-const FormModal: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
+const FormModal: React.FC<FormModalProps> = ({setIsModalOpen, isModalOpen, setFormData, formData}) => {
     return (
         <>
-            <Button type="primary" onClick={showModal}>
-                Open Modal
-            </Button>
-            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <ReactHookForm />
+            <Modal
+                footer={null}
+                open={isModalOpen}
+                onOk={() => setIsModalOpen(false)}
+                onCancel={() => setIsModalOpen(false)}
+            >
+                <ReactHookForm
+                    setFormData={setFormData}
+                    formData={formData}
+                    setIsModalOpen={setIsModalOpen}
+                />
             </Modal>
         </>
     );

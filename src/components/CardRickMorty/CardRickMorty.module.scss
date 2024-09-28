@@ -1,0 +1,22 @@
+.title {
+  margin-top: 20px;
+  text-align: center;
+}
+.card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .list {
+    margin: 20px;
+    list-style: none;
+
+    img {
+      border-radius: 15px;
+    }
+
+    p {
+      margin: 10px;
+    }
+  }
+}
