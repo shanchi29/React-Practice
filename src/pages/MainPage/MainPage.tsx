@@ -1,41 +1,24 @@
-import React, {SetStateAction, useEffect, useState} from 'react';
+import React from 'react';
 import TableAccount from "../../components/Tables/TableAccount/TableAccount";
 import FormModal from "../../components/Modals/FormModal/FormModal";
 import UserCardModal from "../../components/Modals/UserCardModal/UserCardModal";
+import {useAppSelector} from "../../store/hook/reduxHooks";
+import {
+    selectIsModalOpen,
+    selectIsModalOpenCard
+} from "../../store/selectors/selectors";
 
 
 const MainPage: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState<SetStateAction<any>>([]);
-    const [isModalOpenCard, setIsModalOpenCard] = useState(false)
-    const [selectedRow, setSelectedRow] = useState<SetStateAction<any>>();
-
+    const isModalOpen = useAppSelector(selectIsModalOpen)
+    const isModalOpenCard = useAppSelector(selectIsModalOpenCard)
 
     return (
         <div>
-            {isModalOpenCard &&
-                <UserCardModal
-                    selectedRow={selectedRow}
-                    setIsModalOpenCard={setIsModalOpenCard}
-                    isModalOpenCard={isModalOpenCard}
-                />
-            }
-        <TableAccount
-            setSelectedRow={setSelectedRow}
-            setIsModalOpenCard={setIsModalOpenCard}
-            formData={formData}
-            setIsModalOpen={setIsModalOpen}
-        />
-            {isModalOpen &&
-                <FormModal
-                    setFormData={setFormData}
-                    formData={formData}
-                    setIsModalOpen={setIsModalOpen}
-                    isModalOpen={isModalOpen}
-                />
-            }
+            {isModalOpenCard && <UserCardModal/>}
+            <TableAccount/>
+            {isModalOpen && <FormModal/>}
         </div>
-
     )
 }
 export default MainPage;

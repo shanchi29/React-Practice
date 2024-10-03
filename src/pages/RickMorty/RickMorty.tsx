@@ -1,41 +1,37 @@
-import React, {useEffect, useState} from "react";
-import {getCharacters} from "../../api/characters";
+import React, {useEffect} from "react";
 import CardRickMorty from "../../components/CardRickMorty/CardRickMorty";
 import styles from "../../components/CardRickMorty/CardRickMorty.module.scss";
-
-export interface RickMorty {
-    id: number;
-    name: string;
-    image: string;
-    status: string,
-    species: string;
-    gender: string;
-}
-
+import {useAppDispatch, useAppSelector,} from "../../store/hook/reduxHooks";
+import {getCharacters} from "../../store/slices/charactersSlice/actions";
+import {
+    selectCharacters, selectCharactersError,
+    selectCharactersLoading
+} from "../../store/selectors/selectors";
 
 const RickMorty: React.FC = () => {
-    const [result, setResult] = useState<RickMorty[]>([]);
-
-    const getAllCharacters = async () => {
-        const res = await getCharacters()
-        setResult(res ? res.results : [])
-        return res
-
-    }
+    const dispatch = useAppDispatch();
+    const characters = useAppSelector(selectCharacters);
+    const loading = useAppSelector(selectCharactersLoading);
+    const error = useAppSelector(selectCharactersError);
 
     useEffect(() => {
-        getAllCharacters()
-    }, []);
+        dispatch(getCharacters());
+    }, [dispatch]);
 
+    if (loading) {
+        return <div>Загрузка...</div>;
+    }
+    if (error) {
+        return <div>Ошибка загрузки</div>;
+    }
 
     return (
         <div>
             <h1 className={styles.title}>Характеристики</h1>
             <ul className={styles.card}>
-                {result?.map(({id, name, image, status, species, gender}) => (
+                {characters?.map(({id, name, image, status, species, gender}) => (
                     <CardRickMorty
                         key={id}
-                        id={id}
                         name={name}
                         image={image}
                         status={status}

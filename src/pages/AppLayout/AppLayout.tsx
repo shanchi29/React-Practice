@@ -6,6 +6,7 @@ import About from "../about/About";
 import NotFound from "../NotFound/NotFound";
 import RickMorty from "../RickMorty/RickMorty";
 
+
 const AppLayout: FC = () => {
     return (
         <Layout style={{

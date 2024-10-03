@@ -1,29 +1,29 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React from 'react';
 import { Modal } from 'antd';
 import ReactHookForm from "../../Forms/ReactHookForm/ReactHookForm";
-import {FormData} from "../../Forms/ReactHookForm/types";
+import {useAppDispatch, useAppSelector} from "../../../store/hook/reduxHooks";
+import {setIsModalOpenForm} from "../../../store/slices/modals/modalSlice";
+import {
+    selectIsModalOpen
+} from "../../../store/selectors/selectors";
 
-interface FormModalProps {
-    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-    isModalOpen: boolean;
-    setFormData: Dispatch<SetStateAction<FormData[]>>;
-    formData: FormData[];
-}
+const FormModal: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const isModalOpen = useAppSelector(selectIsModalOpen)
 
-const FormModal: React.FC<FormModalProps> = ({setIsModalOpen, isModalOpen, setFormData, formData}) => {
+    const handleCloseModal = () => {
+        dispatch(setIsModalOpenForm(false));
+    };
+
     return (
         <>
             <Modal
                 footer={null}
                 open={isModalOpen}
-                onOk={() => setIsModalOpen(false)}
-                onCancel={() => setIsModalOpen(false)}
+                onOk={handleCloseModal}
+                onCancel={handleCloseModal}
             >
-                <ReactHookForm
-                    setFormData={setFormData}
-                    formData={formData}
-                    setIsModalOpen={setIsModalOpen}
-                />
+                <ReactHookForm/>
             </Modal>
         </>
     );

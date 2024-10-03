@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+
+      "baseUrl": "src",
+      "paths": {
+        "@components/*": ["components/*"],
+        "@pages/*": ["pages/*"],
+        "@store/*": ["store/*"],
+        "@api/*": ["api/*"]
+      },
+
     "target": "es5",
     "lib": [
       "dom",
@@ -22,5 +31,6 @@
   "include": [
     "global.d.ts",
     "src"
-  ]
+  ],
 }
+

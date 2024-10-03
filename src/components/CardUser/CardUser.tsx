@@ -1,13 +1,13 @@
 import React from "react";
 import Image from '../../assets/images/2.png'
-import {FormData} from "../Forms/ReactHookForm/types";
 import styles from './CardUser.module.scss'
+import {useAppSelector} from "../../store/hook/reduxHooks";
+import {selectSelectedRow} from "../../store/selectors/selectors";
 
-interface CardUserProps {
-    selectedRow: FormData;
-}
 
-const CardUser: React.FC<CardUserProps> = ({selectedRow}) => {
+const CardUser: React.FC = () => {
+    const selectedRow = useAppSelector(selectSelectedRow);
+
     const { name, age, email, password, comments } = selectedRow
     return (
         <div className={styles.card}>
