@@ -3,7 +3,6 @@ import styles from './CardRickMorty.module.scss'
 
 
 interface CardRickMortyProps {
-    id: number;
     name: string;
     image: string;
     status: string,
@@ -12,7 +11,6 @@ interface CardRickMortyProps {
 }
 
 const CardRickMorty: React.FC<CardRickMortyProps> = ({
-      id,
       name,
       image,
       status,

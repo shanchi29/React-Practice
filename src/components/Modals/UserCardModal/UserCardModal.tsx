@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+import React from 'react';
+import { Modal } from 'antd';
 import CardUser from "../../CardUser/CardUser";
+import {useAppDispatch, useAppSelector} from "../../../store/hook/reduxHooks";
+import {
+    selectIsModalOpenCard,
+    selectSelectedRow
+} from "../../../store/selectors/selectors";
+import {setIsModalOpenCardForm} from "../../../store/slices/modals/modalSlice";
 
-interface FormModalUserProps {
-    setIsModalOpenCard: any;
-    isModalOpenCard: any;
-    selectedRow: any;
-}
 
-const UserCardModal: React.FC<FormModalUserProps> = ({setIsModalOpenCard, isModalOpenCard, selectedRow}) => {
+
+const UserCardModal: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const isModalOpenCard = useAppSelector(selectIsModalOpenCard)
+
+    const handleCloseModalCard = () => {
+        dispatch(setIsModalOpenCardForm(false));
+    };
 
     return (
         <div>
-            <Modal footer={null} open={isModalOpenCard} onOk={() => setIsModalOpenCard(false)} onCancel={() => setIsModalOpenCard(false)}>
-                <CardUser selectedRow={selectedRow} />
+            <Modal footer={null}
+                   open={isModalOpenCard}
+                   onOk={handleCloseModalCard}
+                   onCancel={handleCloseModalCard}>
+                <CardUser />
             </Modal>
         </div>
     );

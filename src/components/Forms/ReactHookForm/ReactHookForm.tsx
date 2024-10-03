@@ -1,19 +1,15 @@
 import {useForm, Controller, SubmitHandler} from "react-hook-form"
 import {Input, Form} from 'antd';
 import FormItem from "antd/es/form/FormItem";
-import {Dispatch, FC, SetStateAction} from "react";
+import React from "react";
 import {FormData} from "./types";
 import {Button} from "../../ui/Button/Button";
 import {useAppDispatch} from "../../../store/hook/reduxHooks";
 import {addFormData} from "../../../store/slices/forms/formSlice";
+import {setIsModalOpenForm} from "../../../store/slices/modals/modalSlice";
 
-interface ReactHookFormProps  {
-    formData: FormData[]
-    setFormData: Dispatch<SetStateAction<FormData[]>>;
-    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-}
 
-const ReactHookForm: FC<ReactHookFormProps> = ({setFormData,formData,setIsModalOpen}: ReactHookFormProps) => {
+const ReactHookForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const {
         control,
@@ -25,7 +21,7 @@ const ReactHookForm: FC<ReactHookFormProps> = ({setFormData,formData,setIsModalO
     const onSubmit: SubmitHandler<FormData> = (data) => {
         dispatch(addFormData(data))
         reset();
-        setIsModalOpen(false)
+        dispatch(setIsModalOpenForm(false))
     };
     return (
         <Form

@@ -1,11 +1,19 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React from 'react';
 import {Table} from 'antd';
 import {columns} from "./constants";
 import styles from './TableAccount.module.scss'
 import {Button} from "../../ui/Button/Button";
-import {useAppSelector} from "../../../store/hook/reduxHooks";
-import {selectFormData} from "../../../store/selectors/selectors";
-
+import {useAppDispatch, useAppSelector} from "../../../store/hook/reduxHooks";
+import {
+    selectFormData,
+} from "../../../store/selectors/selectors";
+import {
+    setIsModalOpenCardForm,
+    setIsModalOpenForm
+} from "../../../store/slices/modals/modalSlice";
+import {
+    setSelectedRow
+} from "../../../store/slices/table/tableSlice";
 
 export interface DataType{
     key: string;
@@ -13,33 +21,20 @@ export interface DataType{
     password: string;
     comments: string;
 }
-
-interface TableAccountProps {
-    setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-    formData: FormData[];
-    setIsModalOpenCard: Dispatch<SetStateAction<boolean>>;
-    setSelectedRow: Dispatch<SetStateAction<FormData>>;
-}
-
-const TableAccount: React.FC<TableAccountProps> = ({
-     setIsModalOpen,
-     formData,
-     setIsModalOpenCard,
-     setSelectedRow
-}: TableAccountProps) => {
-
-    const formData1 = useAppSelector(selectFormData)
+const TableAccount: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const formData = useAppSelector(selectFormData)
 
     const handleRowClick = (row: FormData) => {
-        setIsModalOpenCard(true)
-        setSelectedRow(row)
+        dispatch(setIsModalOpenCardForm(true))
+        dispatch(setSelectedRow(row));
     }
 
     return (
         <div className={styles.table}>
             <h1>Пользователи</h1>
             <Button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => dispatch(setIsModalOpenForm(true))}
                 className={styles.button}
                 type="primary"
                 text='Добавить'
@@ -50,7 +45,7 @@ const TableAccount: React.FC<TableAccountProps> = ({
             })}
             style={{
             width: '100%'
-        }}  columns={columns} dataSource={formData1}/>
+        }}  columns={columns} dataSource={formData}/>
         </div>
     )
 };
