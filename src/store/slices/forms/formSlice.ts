@@ -1,21 +1,21 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface FormState {
-    formData: FormData[];
+  formData: FormData[];
 }
 
 const initialState: FormState = {
-    formData: [],
+  formData: [],
 };
 
 const formSlice = createSlice({
-    name: 'form',
-    initialState,
-    reducers: {
-        addFormData: (state: FormState, action: PayloadAction<any>) => {
-            state.formData = [...state.formData, action.payload];
-        },
+  name: "form",
+  initialState,
+  reducers: {
+    addFormData: (state: FormState, action: PayloadAction<any>) => {
+      state.formData = [...state.formData, action.payload];
     },
+  },
 });
 
 export const { addFormData } = formSlice.actions;

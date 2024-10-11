@@ -1,6 +1,7 @@
 {
   "name": "react-form",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
@@ -11,6 +12,7 @@
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
     "antd": "^5.20.6",
     "axios": "^1.7.7",
     "json-server": "^1.0.0-beta.3",
@@ -27,11 +29,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "json-server": "npx json-server db.json --port=8080"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "format": "prettier --write .",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +54,9 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.78.0"
+    "eslint": "^8.57.1",
+    "prettier": "^3.3.3",
+    "sass": "^1.78.0",
+    "vite": "^5.4.8"
   }
 }
